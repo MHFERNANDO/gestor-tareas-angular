@@ -1,3 +1,4 @@
+
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
@@ -10,45 +11,50 @@ import { TaskForm } from '../task-form/task-form';
   templateUrl: './task-list.html',
   styleUrl: './task-list.css'
 })
+
 export class TaskListComponent implements OnInit {
 
   taskService = inject(TaskService);
 
-  filter = signal<'all' | 'pending' | 'completed'>('all');
+  filtro = signal<'todas' | 'pendientes' | 'completadas'>('todas');
 
-  searchTerm = signal('');
+  textoBusqueda = signal('');
 
-  //lista calculada según búsqueda y filtro
-  filteredTasks = computed(() => {
-    const tasks = this.taskService.tasks();
-    const currentFilter = this.filter();
-    const search = this.searchTerm().toLowerCase().trim();
+  tareasFiltradas = computed(() => {
 
-    return tasks.filter(task => {
+    const tareas = this.taskService.tasks();
+    const estado = this.filtro();
+    const busqueda = this.textoBusqueda().toLowerCase().trim();
 
-      //ver el estado de la tarea
-      const matchesStatus =
-        currentFilter === 'all' ||
-        (currentFilter === 'pending' && !task.completed) ||
-        (currentFilter === 'completed' && task.completed);
+    return tareas.filter(tarea => {
 
-      const matchesSearch =
-        task.title.toLowerCase().includes(search);
+      const cumpleEstado =
+        estado === 'todas' ||
+        (estado === 'pendientes' && !tarea.completed) ||
+        (estado === 'completadas' && tarea.completed);
 
-      return matchesStatus && matchesSearch;
+      const cumpleBusqueda =
+        tarea.title.toLowerCase().includes(busqueda);
+
+      return cumpleEstado && cumpleBusqueda;
+
     });
+
   });
 
-  // Cargar tareas cuando inicia el componente
+  // Cargar las tareas al abrir el componente
   ngOnInit() {
     this.taskService.loadTasks();
   }
 
-  createTask(title: string) {
-    this.taskService.addTask(title);
+  // Agregar una tarea desde el formulario
+  crearTarea(titulo: string) {
+    this.taskService.addTask(titulo);
   }
 
-  changeFilter(status: 'all' | 'pending' | 'completed') {
-    this.filter.set(status);
+  // Cambiar el filtro de las tareas
+  cambiarFiltro(estado: 'todas' | 'pendientes' | 'completadas') {
+    this.filtro.set(estado);
   }
+
 }

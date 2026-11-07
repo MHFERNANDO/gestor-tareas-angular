@@ -1,4 +1,5 @@
 
+<!-- Formulario para agregar tareas -->
 <form (ngSubmit)="createTask()" class="task-form">
 
   <label for="taskTitle">
@@ -7,18 +8,21 @@
 
   <div class="form-row">
 
+    <!-- Campo para escribir el nombre de la tarea -->
     <input
       id="taskTitle"
       type="text"
       name="title"
-      [(ngModel)]="title" //mantiene sincronizado el campo de texto con la variable title del componente
+      [(ngModel)]="title"
       placeholder="Escribe el nombre de la tarea..."
       required
       maxlength="120"
     />
 
-    <!-- desactiva el boton cuando no hay texto valido-->
-    <button type="submit" [disabled]="!title.trim()"> 
+    <!-- Botón para agregar la tarea -->
+    <button
+      type="submit"
+      [disabled]="!title.trim()">
       + Agregar
     </button>
 

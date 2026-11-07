@@ -1,1 +1,25 @@
-<p>task-list works!</p>
+<div class="task-container">
+  <h2>📋 Gestor de Tareas del Curso</h2>
+
+  <button (click)="taskService.loadTasks()" class="btn-load">
+    🔄 Cargar Tareas desde la API
+  </button>
+
+  <ul class="task-list">
+    @for (task of taskService.tasks(); track task.id) {
+      <li class="task-item">
+        <span
+          (click)="taskService.toggleTask(task.id)"
+          [class.completed]="task.completed"
+          class="task-title">
+          {{ task.title }}
+        </span>
+        <button (click)="taskService.deleteTask(task.id)" class="btn-delete">
+          ❌
+        </button>
+      </li>
+    } @empty {
+      <p>No hay tareas cargadas. Presiona el botón para consultar la API.</p>
+    }
+  </ul>
+</div>

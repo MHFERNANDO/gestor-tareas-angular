@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TaskService } from '../../services/task.service';
 
 @Component({
-  imports: [],
   selector: 'app-task-list',
-  styleUrl: './task-list.css',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './task-list.html',
+  styleUrl: './task-list.css'
 })
-export class TaskList {}
+export class TaskListComponent implements OnInit {
+  taskService = inject(TaskService);
+
+  ngOnInit() {
+    this.taskService.loadTasks();
+  }
+}

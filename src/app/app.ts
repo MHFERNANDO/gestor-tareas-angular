@@ -1,12 +1,16 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { TaskListComponent } from './components/task-list/task-list';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
-  templateUrl: './app.html',
+  standalone: true,
+  imports: [TaskListComponent],
+  template: `
+    <main>
+      <app-task-list></app-task-list>
+    </main>
+  `
 })
 export class App {
-  protected readonly title = signal('gestor-tareas-angular');
+  title = 'gestor-tareas-angular';
 }

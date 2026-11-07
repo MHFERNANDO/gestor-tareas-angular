@@ -1,0 +1,41 @@
+.task-container {
+  padding: 20px;
+  font-family: sans-serif;
+  max-width: 500px;
+}
+
+.btn-load {
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  padding: 6px 0;
+}
+
+.task-title {
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.btn-delete {
+  color: red;
+  cursor: pointer;
+  border: none;
+  background: none;
+}

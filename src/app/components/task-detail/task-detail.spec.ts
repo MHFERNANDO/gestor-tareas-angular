@@ -18,4 +18,19 @@ describe('TaskDetail', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('debe mostrar datos de una tarea', async () => {
+    fixture.componentRef.setInput('tarea', {
+      id:1,
+      title:'Estudiar Angular',
+      completed:false
+
+    });
+
+    await fixture.whenStable();
+    const contenido = fixture.nativeElement.textContent;
+    expect(contenido).toContain('Estudiar Angular');
+    expect(contenido).toContain('Pendiente');
+
+  });
 });

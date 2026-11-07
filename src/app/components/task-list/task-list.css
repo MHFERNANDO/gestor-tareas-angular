@@ -1,41 +1,163 @@
+
+/* Contenedor principal */
 .task-container {
-  padding: 20px;
-  font-family: sans-serif;
-  max-width: 500px;
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  font-family: Arial, sans-serif;
 }
 
-.btn-load {
-  margin-bottom: 15px;
-  padding: 8px 12px;
+/* Encabezado */
+.task-header {
+  margin-bottom: 24px;
+}
+
+.task-header h1 {
+  font-size: 26px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.task-header p {
+  color: #64748b;
+}
+
+/* Buscador */
+.search-section {
+  margin-bottom: 20px;
+}
+
+.search-section label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.search-section input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.search-section input:focus {
+  outline: 2px solid #2e0d57;
+  outline-offset: 1px;
+}
+
+/* Filtros de estado */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  padding: 10px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f1f5f9;
   cursor: pointer;
 }
 
+.filters button.active {
+  background: #2e0d57;
+  color: white;
+  border-color: #2e0d57;
+}
+
+/* Botón para recargar */
+.btn-load {
+  padding: 10px 14px;
+  margin-bottom: 20px;
+  background: #e2e8f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Lista de tareas */
 .task-list {
-  list-style: none;
   padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .task-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
-  border-bottom: 1px solid #eee;
-  padding: 6px 0;
+  gap: 12px;
+  padding: 14px;
+  margin-bottom: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
 }
 
-.task-title {
+/* Contenido de cada tarea */
+.task-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
   cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.task-content input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .completed {
   text-decoration: line-through;
-  color: gray;
+  color: #94a3b8;
 }
 
+/* Botón para eliminar */
 .btn-delete {
-  color: red;
-  cursor: pointer;
+  color: #dc2626;
+  background: transparent;
   border: none;
-  background: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Mensajes y contador */
+.empty-message {
+  text-align: center;
+  color: #64748b;
+  padding: 25px;
+}
+
+.task-count {
+  margin-top: 20px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+  .task-container {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  .task-header h1 {
+    font-size: 21px;
+  }
+
+  .filters button {
+    flex: 1;
+  }
 }

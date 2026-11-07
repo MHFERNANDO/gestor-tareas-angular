@@ -1,1 +1,27 @@
-<p>task-form works!</p>
+
+<form (ngSubmit)="createTask()" class="task-form">
+
+  <label for="taskTitle">
+    Nueva tarea
+  </label>
+
+  <div class="form-row">
+
+    <input
+      id="taskTitle"
+      type="text"
+      name="title"
+      [(ngModel)]="title" //mantiene sincronizado el campo de texto con la variable title del componente
+      placeholder="Escribe el nombre de la tarea..."
+      required
+      maxlength="120"
+    />
+
+    <!-- desactiva el boton cuando no hay texto valido-->
+    <button type="submit" [disabled]="!title.trim()"> 
+      + Agregar
+    </button>
+
+  </div>
+
+</form>

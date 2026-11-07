@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Task } from '../../task.model';
 
 @Component({
-  imports: [],
   selector: 'app-task-detail',
-  styleUrl: './task-detail.css',
+  imports: [],
   templateUrl: './task-detail.html',
+  styleUrl:'./task-detail.css'
 })
-export class TaskDetail {}
+
+
+export class TaskDetail{
+  tarea= input<Task | null>(null);
+}

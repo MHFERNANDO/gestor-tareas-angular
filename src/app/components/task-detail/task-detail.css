@@ -1,0 +1,44 @@
+.detalle-tarea{
+    max-width: 760px;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    font-family: Arial, sans-serif;
+}
+
+.detalle-tarea h1{
+    color: #1e293b;
+    margin-bottom:24px;
+}
+
+.detalle-tarea dl div{
+    margin-bottom: 16px;
+}
+
+.detalle-tarea dt{
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.detalle-tarea dd{
+    margin-left: 0;
+    overflow-wrap: anywhere;
+}
+
+.completada{
+    color: #64748b;
+}
+
+@media (max-width: 600px){
+    .detalle-tarea{
+        margin: 12px;
+        padding: 16px;
+    }
+
+    .detalle-tarea h1{
+        font-size: 21px;
+    }
+}

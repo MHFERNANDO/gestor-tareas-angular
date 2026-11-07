@@ -1,1 +1,27 @@
-<p>task-detail works!</p>
+<section class="detalle-tarea" aria-labelledby="titulo-detalle">
+    <h1 id="titulo-detalle">Detalle de la tarea</h1>
+
+    @if (tarea(); as t){
+        <dl>
+            <div>
+                <dt>Identificador</dt>
+                <dd>{{ t.id }}</dd>
+            </div>
+
+            <div>
+                <dt>Título</dt>
+                <dd>{{ t.title }}</dd>
+            </div>
+
+            <div>
+                <dt>Estado</dt>
+                <dd [class.completada]="t.completed">
+                    {{ t.completed ? 'Completada' : 'Pendiente'}}
+                </dd>
+            </div>
+        </dl>
+    }@else{
+        <p>Selecciona una tarea para consultar sus detalles.</p>
+    }
+
+</section>

@@ -73,11 +73,12 @@
           </span>
 
         </label>
-             
+
         <!-- Botón para eliminar una tarea -->
         <button
           type="button"
           class="btn-delete"
+          title="Eliminar tarea"
           (click)="taskService.deleteTask(tarea.id)"
           [attr.aria-label]="'Eliminar tarea ' + tarea.title">
           ✕

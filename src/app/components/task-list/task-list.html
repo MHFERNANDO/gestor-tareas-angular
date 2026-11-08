@@ -1,4 +1,3 @@
-
 <div class="task-container">
 
   <header class="task-header">
@@ -6,161 +5,49 @@
     <p>Organiza y administra tus actividades.</p>
   </header>
 
-  <!-- Formulario para agregar tareas -->
-  <app-task-form
-    (taskCreated)="crearTarea($event)">
-  </app-task-form>
+  <app-task-form (taskCreated)="crearTarea($event)"></app-task-form>
 
-  <!-- Buscador de tareas -->
   <div class="search-section">
     <label for="search">Buscar tareas</label>
-
-    <input
-      id="search"
-      type="text"
-      placeholder="Buscar por título"
-      [ngModel]="textoBusqueda()"
-      (ngModelChange)="textoBusqueda.set($event)"
-    />
+    <input id="search" type="text" placeholder="Buscar por título" [ngModel]="textoBusqueda()" (ngModelChange)="textoBusqueda.set($event)"/>
   </div>
 
-  <!-- Botones para filtrar las tareas -->
   <div class="filters">
-
-    <button
-      type="button"
-      (click)="cambiarFiltro('todas')"
-      [class.active]="filtro() === 'todas'">
-      Todas
-    </button>
-
-    <button
-      type="button"
-      (click)="cambiarFiltro('pendientes')"
-      [class.active]="filtro() === 'pendientes'">
-      Pendientes
-    </button>
-
-    <button
-      type="button"
-      (click)="cambiarFiltro('completadas')"
-      [class.active]="filtro() === 'completadas'">
-      Completadas
-    </button>
-
+    <button type="button" (click)="cambiarFiltro('todas')" [class.active]="filtro() === 'todas'">Todas</button>
+    <button type="button" (click)="cambiarFiltro('pendientes')" [class.active]="filtro() === 'pendientes'">Pendientes</button>
+    <button type="button" (click)="cambiarFiltro('completadas')" [class.active]="filtro() === 'completadas'">Completadas</button>
   </div>
 
-  <!-- Botón para cargar las tareas desde la API -->
-  <button
-    type="button"
-    class="btn-load"
-    (click)="taskService.loadTasks()">
+  <button type="button" class="btn-load" (click)="taskService.loadTasks()">
     Recargar tareas desde la API
   </button>
 
-  <!-- Lista de tareas -->
-  <ul class="task-list">
+  @if (taskService.loading()) {
+    <p style="text-align: center; color: #2e0d57; font-weight: bold; margin: 20px 0;">Cargando tareas...</p>
+  } 
+  
+  @if (taskService.error()) {
+    <div style="background: #fee2e2; color: #dc2626; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+      {{ taskService.error() }}
+    </div>
+  }
 
+  <ul class="task-list" style="list-style: none; padding: 0;">
     @for (tarea of tareasFiltradas(); track tarea.id) {
-
-      <li class="task-item">
-
-        @if (tareaEnEdicionId() === tarea.id) {
-
-          <!-- Modo edición -->
-          <div style="display: flex; gap: 8px; width: 100%;">
-
-            <input
-              type="text"
-              style="flex: 1; min-width: 0; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;"
-              [ngModel]="tituloEdicion()"
-              (ngModelChange)="tituloEdicion.set($event)"
-              (keyup.enter)="guardarEdicion(tarea.id)"
-              aria-label="Editar título de la tarea"
-            />
-
-            <button
-              type="button"
-              (click)="guardarEdicion(tarea.id)"
-              style="background: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
-              Guardar
-            </button>
-
-            <button
-              type="button"
-              (click)="cancelarEdicion()"
-              style="background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
-              Cancelar
-            </button>
-
-          </div>
-
-        } @else {
-
-          <!-- Título y estado de la tarea -->
-          <label class="task-content">
-
-            <input
-              type="checkbox"
-              [checked]="tarea.completed"
-              (change)="taskService.toggleTask(tarea.id)"
-            />
-
-            <span [class.completed]="tarea.completed">
-              {{ tarea.title }}
-            </span>
-
-          </label>
-
-          <!-- Acciones de cada tarea -->
-          <div class="task-actions">
-
-            <!-- Enlace para consultar el detalle -->
-            <a
-              [routerLink]="['/tarea', tarea.id]"
-              class="btn-detail">
-              Ver detalle
-            </a>
-
-            <!-- Botón para editar la tarea -->
-            <button
-              type="button"
-              (click)="iniciarEdicion(tarea)"
-              style="background: transparent; border: none; cursor: pointer; font-size: 18px;"
-              [attr.aria-label]="'Editar tarea: ' + tarea.title"
-              title="Editar tarea">
-              ✏️
-            </button>
-
-            <!-- Botón para eliminar la tarea -->
-            <button
-              type="button"
-              class="btn-delete"
-              [attr.aria-label]="'Eliminar tarea: ' + tarea.title"
-              title="Eliminar tarea"
-              (click)="taskService.deleteTask(tarea.id)">
-              ✕
-            </button>
-
-          </div>
-
-        }
-
-      </li>
+      
+      <app-task-item 
+        [tarea]="tarea"
+        (borrar)="manejarBorrado($event)"
+        (toggle)="manejarToggle($event)"
+        (editar)="manejarEdicion($event)">
+      </app-task-item>
 
     } @empty {
-
-      <li class="empty-message">
-        No hay tareas que coincidan con los filtros.
-      </li>
-
+      @if (!taskService.loading()) {
+        <li class="empty-message">No hay tareas que coincidan con los filtros.</li>
+      }
     }
-
   </ul>
 
-  <!-- Cantidad de tareas mostradas -->
-  <p class="task-count">
-    Mostrando {{ tareasFiltradas().length }} tareas
-  </p>
-
+  <p class="task-count">Mostrando {{ tareasFiltradas().length }} tareas</p>
 </div>

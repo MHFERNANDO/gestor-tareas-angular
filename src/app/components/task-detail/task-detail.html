@@ -1,7 +1,8 @@
 <section class="detalle-tarea" aria-labelledby="titulo-detalle">
+
     <h1 id="titulo-detalle">Detalle de la tarea</h1>
 
-    @if (tarea(); as t){
+    @if (tareaMostrada(); as t){
         <dl>
             <div>
                 <dt>Identificador</dt>
@@ -20,8 +21,16 @@
                 </dd>
             </div>
         </dl>
+    }@else if (id() != null){
+
+        <p role="status">No se encontró la tarea en la lista cargada.</p>
+       
     }@else{
         <p>Selecciona una tarea para consultar sus detalles.</p>
     }
+
+    <a routerLink="/" class="enlace-volver">
+    Volver al listado de tareas
+    </a>
 
 </section>

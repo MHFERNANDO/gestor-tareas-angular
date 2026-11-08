@@ -19,6 +19,27 @@ export class TaskListComponent implements OnInit {
   filtro = signal<'todas' | 'pendientes' | 'completadas'>('todas');
 
   textoBusqueda = signal('');
+  // Variables para la edición
+  tareaEnEdicionId = signal<number | null>(null);
+  tituloEdicion = signal<string>('');
+
+  // Funciones de edición
+  iniciarEdicion(tarea: any) {
+    this.tareaEnEdicionId.set(tarea.id);
+    this.tituloEdicion.set(tarea.title);
+  }
+
+  guardarEdicion(id: number) {
+    const nuevoTitulo = this.tituloEdicion().trim();
+    if (nuevoTitulo) {
+      this.taskService.editTask(id, nuevoTitulo);
+    }
+    this.tareaEnEdicionId.set(null); // Sale del modo edición
+  }
+
+  cancelarEdicion() {
+    this.tareaEnEdicionId.set(null);
+  }
 
   tareasFiltradas = computed(() => {
 

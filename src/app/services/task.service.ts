@@ -29,6 +29,12 @@ export class TaskService {
     });
   }
 
+  editTask(id: number, newTitle: string) {
+    this.tasks.update(currentTasks => 
+      currentTasks.map(t => t.id === id ? { ...t, title: newTitle } : t)
+    );
+  }
+
   toggleTask(id: number) {
     this.tasks.update(currentTasks =>
       currentTasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t)

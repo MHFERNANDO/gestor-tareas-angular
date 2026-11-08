@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { TaskListComponent } from './components/task-list/task-list';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TaskListComponent],
+  imports: [RouterOutlet],
   template: `
     <main>
-      <app-task-list></app-task-list>
+      <router-outlet></router-outlet>
     </main>
   `
 })

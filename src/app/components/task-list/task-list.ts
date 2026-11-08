@@ -1,13 +1,13 @@
-
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { TaskService } from '../../services/task.service';
 import { TaskForm } from '../task-form/task-form';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [FormsModule, TaskForm],
+  imports: [FormsModule, TaskForm, RouterLink],
   templateUrl: './task-list.html',
   styleUrl: './task-list.css'
 })
@@ -19,6 +19,7 @@ export class TaskListComponent implements OnInit {
   filtro = signal<'todas' | 'pendientes' | 'completadas'>('todas');
 
   textoBusqueda = signal('');
+
   // Variables para la edición
   tareaEnEdicionId = signal<number | null>(null);
   tituloEdicion = signal<string>('');

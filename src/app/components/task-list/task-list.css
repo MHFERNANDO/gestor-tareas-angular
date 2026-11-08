@@ -161,3 +161,32 @@
     flex: 1;
   }
 }
+
+
+/* Acciones de cada tarea */
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Enlace para visualizar los detalles */
+.btn-detail {
+  color: #2e0d57;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.btn-detail:hover {
+  color: #452078;
+}
+
+@media (max-width: 600px) {
+  .task-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 1;
+  }
+}

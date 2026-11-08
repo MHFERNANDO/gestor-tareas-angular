@@ -1,21 +1,33 @@
 .detalle-tarea{
+    width: calc(100% - 24px);
     max-width: 760px;
     margin: 40px auto;
     padding: 30px;
-    box-sizing: border-box;
-    background: #ffffff;
+    background-color: #ffffff;
+    color: #1e293b;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .detalle-tarea h1{
-    color: #1e293b;
-    margin-bottom:24px;
+    margin: 0 0 24px;
+    font-size: 26px;
+    overflow-wrap: anywhere;
+}
+
+/* Lista de datos de la tarea */
+.detalle-tarea dl {
+  display: grid;
+  gap: 14px;
+  margin: 0 0 24px;
 }
 
 .detalle-tarea dl div{
-    margin-bottom: 16px;
+    min-width: 0;
+    padding: 14px 16px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
 }
 
 .detalle-tarea dt{
@@ -32,27 +44,19 @@
     color: #64748b;
 }
 
-@media (max-width: 600px){
-    .detalle-tarea{
-        margin: 12px;
-        padding: 16px;
-    }
-
-    .detalle-tarea h1{
-        font-size: 21px;
-    }
-}
-
 /*enlace para regresar al listado*/
 .enlace-volver{
-    display: inline-block;
-    margin-top: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
     padding: 10px 16px;
-    border-radius: 8px;
     background-color: #2e0d57;
     color: #ffffff;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
+    text-align: center;
 }
 
 .enlace-volver:hover{
@@ -62,4 +66,25 @@
 .enlace-volver:focus-visible {
   outline: 2px solid #2e0d57;
   outline-offset: 3px;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  .detalle-tarea {
+    margin: 12px auto;
+    padding: 16px;
+  }
+
+  .detalle-tarea h1 {
+    font-size: 21px;
+  }
+
+  .detalle-tarea dl div {
+    padding: 12px;
+  }
+
+  .enlace-volver {
+    display: flex;
+    width: 100%;
+  }
 }

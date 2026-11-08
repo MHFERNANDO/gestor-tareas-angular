@@ -1,3 +1,4 @@
+
 <div class="task-container">
 
   <header class="task-header">
@@ -27,18 +28,21 @@
   <div class="filters">
 
     <button
+      type="button"
       (click)="cambiarFiltro('todas')"
       [class.active]="filtro() === 'todas'">
       Todas
     </button>
 
     <button
+      type="button"
       (click)="cambiarFiltro('pendientes')"
       [class.active]="filtro() === 'pendientes'">
       Pendientes
     </button>
 
     <button
+      type="button"
       (click)="cambiarFiltro('completadas')"
       [class.active]="filtro() === 'completadas'">
       Completadas
@@ -48,6 +52,7 @@
 
   <!-- Botón para cargar las tareas desde la API -->
   <button
+    type="button"
     class="btn-load"
     (click)="taskService.loadTasks()">
     Recargar tareas desde la API
@@ -59,52 +64,86 @@
     @for (tarea of tareasFiltradas(); track tarea.id) {
 
       <li class="task-item">
-        
+
         @if (tareaEnEdicionId() === tarea.id) {
-          <!-- Modo Edición -->
+
+          <!-- Modo edición -->
           <div style="display: flex; gap: 8px; width: 100%;">
-            <input 
-              type="text" 
-              style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;"
-              [ngModel]="tituloEdicion()" 
+
+            <input
+              type="text"
+              style="flex: 1; min-width: 0; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;"
+              [ngModel]="tituloEdicion()"
               (ngModelChange)="tituloEdicion.set($event)"
               (keyup.enter)="guardarEdicion(tarea.id)"
+              aria-label="Editar título de la tarea"
             />
-            <button (click)="guardarEdicion(tarea.id)" style="background: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Guardar</button>
-            <button (click)="cancelarEdicion()" style="background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Cancelar</button>
+
+            <button
+              type="button"
+              (click)="guardarEdicion(tarea.id)"
+              style="background: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+              Guardar
+            </button>
+
+            <button
+              type="button"
+              (click)="cancelarEdicion()"
+              style="background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
+              Cancelar
+            </button>
+
           </div>
+
         } @else {
 
+          <!-- Título y estado de la tarea -->
           <label class="task-content">
+
             <input
               type="checkbox"
               [checked]="tarea.completed"
               (change)="taskService.toggleTask(tarea.id)"
             />
+
             <span [class.completed]="tarea.completed">
               {{ tarea.title }}
             </span>
+
           </label>
 
-          <div style="display: flex; gap: 10px; flex-shrink: 0;">
-            <!-- Botón de Editar -->
-            <button 
-              type="button" 
-              (click)="iniciarEdicion(tarea)" 
-              style="background: transparent; border: none; cursor: pointer; font-size: 18px;" 
+          <!-- Acciones de cada tarea -->
+          <div class="task-actions">
+
+            <!-- Enlace para consultar el detalle -->
+            <a
+              [routerLink]="['/tarea', tarea.id]"
+              class="btn-detail">
+              Ver detalle
+            </a>
+
+            <!-- Botón para editar la tarea -->
+            <button
+              type="button"
+              (click)="iniciarEdicion(tarea)"
+              style="background: transparent; border: none; cursor: pointer; font-size: 18px;"
+              [attr.aria-label]="'Editar tarea: ' + tarea.title"
               title="Editar tarea">
               ✏️
             </button>
-            
 
+            <!-- Botón para eliminar la tarea -->
             <button
               type="button"
               class="btn-delete"
+              [attr.aria-label]="'Eliminar tarea: ' + tarea.title"
               title="Eliminar tarea"
               (click)="taskService.deleteTask(tarea.id)">
               ✕
             </button>
+
           </div>
+
         }
 
       </li>

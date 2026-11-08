@@ -6,7 +6,7 @@
 **Framework seleccionado:** Angular  
 **Integrantes:** Victoria Andrade, Isabel Ullauri, Mateo Molina y Fernando Martinez  
 **Repositorio GitHub:** https://github.com/MHFERNANDO/gestor-tareas-angular  
-**Aplicación desplegada:** https://gestor-tareas-ups.netlify.app
+**Aplicación desplegada:** https://gestor-tareas-angular.netlify.app
 
 ---
 

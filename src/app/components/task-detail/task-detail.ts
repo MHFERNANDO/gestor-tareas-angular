@@ -1,10 +1,11 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Task } from '../../task.model';
 import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './task-detail.html',
   styleUrl:'./task-detail.css'
 })
@@ -43,4 +44,11 @@ export class TaskDetail{
     ) ?? null;
 
   });
+
+  //carga tareas si el servicio aun está vacio
+  ngOnInit(): void {
+    if (this.taskService.tasks().length === 0) {
+      this.taskService.loadTasks();
+    }
+  }
 }

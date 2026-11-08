@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskDetail } from './task-detail';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../task.model';
+import { provideRouter } from '@angular/router';
 
 describe('TaskDetail', () => {
 
@@ -17,9 +18,13 @@ describe('TaskDetail', () => {
     await TestBed.configureTestingModule({
       imports: [TaskDetail],
       providers: [
+        provideRouter([]),
         {
           provide: TaskService,
-          useValue: { tasks: tareasPrueba }
+          useValue: {
+            tasks: tareasPrueba,
+            loadTasks: () => {}
+          }
         }
       ]
     }).compileComponents();

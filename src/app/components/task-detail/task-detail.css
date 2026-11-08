@@ -42,3 +42,24 @@
         font-size: 21px;
     }
 }
+
+/*enlace para regresar al listado*/
+.enlace-volver{
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: #2e0d57;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.enlace-volver:hover{
+    background-color: #452078;
+}
+
+.enlace-volver:focus-visible {
+  outline: 2px solid #2e0d57;
+  outline-offset: 3px;
+}

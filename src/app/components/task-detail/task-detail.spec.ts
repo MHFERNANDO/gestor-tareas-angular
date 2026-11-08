@@ -1,4 +1,3 @@
-
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskDetail } from './task-detail';
@@ -23,6 +22,8 @@ describe('TaskDetail', () => {
           provide: TaskService,
           useValue: {
             tasks: tareasPrueba,
+            loading: signal(false),
+            error: signal<string | null>(null),
             loadTasks: () => {}
           }
         }

@@ -15,6 +15,7 @@ describe('TaskService', () => {
         provideHttpClientTesting()
       ]
     });
+
     service = TestBed.inject(TaskService);
     httpMock = TestBed.inject(HttpTestingController);
   });
@@ -44,10 +45,17 @@ describe('TaskService', () => {
   });
 
   it('debe cambiar el estado completado de una tarea (toggle)', () => {
-    // Inicializamos el Signal manualmente para la prueba
-    service.tasks.set([{ id: 1, title: 'Prueba Toggle', completed: false }]);
+    service.tasks.set([
+      { id: 1, title: 'Prueba Toggle', completed: false }
+    ]);
 
     service.toggleTask(1);
+
+    // Verificar y responder a la petición PUT
+    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/todos/1');
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body.completed).toBe(true);
+    req.flush({ id: 1, title: 'Prueba Toggle', completed: true });
 
     expect(service.tasks()[0].completed).toBe(true);
   });
@@ -59,6 +67,11 @@ describe('TaskService', () => {
     ]);
 
     service.deleteTask(2);
+
+    // Verificar y responder a la petición DELETE
+    const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/todos/2');
+    expect(req.request.method).toBe('DELETE');
+    req.flush(null);
 
     expect(service.tasks().length).toBe(1);
     expect(service.tasks()[0].id).toBe(1);

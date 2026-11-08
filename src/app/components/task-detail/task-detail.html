@@ -1,36 +1,49 @@
+
 <section class="detalle-tarea" aria-labelledby="titulo-detalle">
 
-    <h1 id="titulo-detalle">Detalle de la tarea</h1>
+  <h1 id="titulo-detalle">Detalle de la tarea</h1>
 
-    @if (tareaMostrada(); as t){
-        <dl>
-            <div>
-                <dt>Identificador</dt>
-                <dd>{{ t.id }}</dd>
-            </div>
+  @if (tareaMostrada(); as t){
 
-            <div>
-                <dt>Título</dt>
-                <dd>{{ t.title }}</dd>
-            </div>
+    <dl>
+      <div>
+        <dt>Identificador</dt>
+        <dd>{{ t.id }}</dd>
+      </div>
 
-            <div>
-                <dt>Estado</dt>
-                <dd [class.completada]="t.completed">
-                    {{ t.completed ? 'Completada' : 'Pendiente'}}
-                </dd>
-            </div>
-        </dl>
-    }@else if (id() != null){
+      <div>
+        <dt>Título</dt>
+        <dd>{{ t.title }}</dd>
+      </div>
 
-        <p role="status">No se encontró la tarea en la lista cargada.</p>
-       
-    }@else{
-        <p>Selecciona una tarea para consultar sus detalles.</p>
-    }
+      <div>
+        <dt>Estado</dt>
+        <dd [class.completada]="t.completed">
+          {{ t.completed ? 'Completada' : 'Pendiente' }}
+        </dd>
+      </div>
+    </dl>
 
-    <a routerLink="/" class="enlace-volver">
+  }@else if (taskService.loading()){
+    <p role="status">Cargando información de la tarea...</p>
+
+  }@else if (taskService.error()){
+
+    <!-- error al consultar los datos-->
+    <p role="alert">{{ taskService.error() }}</p>
+
+  }@else if (id() != null){
+
+    <!-- No existe una tarea con ese ID -->
+    <p role="status">
+      No se encontró la tarea solicitada.
+    </p>
+
+  }@else{
+    <p>Selecciona una tarea para consultar sus detalles.</p>
+  }
+
+  <a routerLink="/" class="enlace-volver">
     Volver al listado de tareas
-    </a>
-
+  </a>
 </section>

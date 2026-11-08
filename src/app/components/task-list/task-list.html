@@ -5,49 +5,100 @@
     <p>Organiza y administra tus actividades.</p>
   </header>
 
-  <app-task-form (taskCreated)="crearTarea($event)"></app-task-form>
+  <!-- Formulario para agregar tareas -->
+  <app-task-form
+    (taskCreated)="crearTarea($event)">
+  </app-task-form>
 
+  <!-- Buscador -->
   <div class="search-section">
     <label for="search">Buscar tareas</label>
-    <input id="search" type="text" placeholder="Buscar por título" [ngModel]="textoBusqueda()" (ngModelChange)="textoBusqueda.set($event)"/>
+
+    <input
+      id="search"
+      type="text"
+      placeholder="Buscar por título"
+      [ngModel]="textoBusqueda()"
+      (ngModelChange)="textoBusqueda.set($event)"
+    />
   </div>
 
   <div class="filters">
-    <button type="button" (click)="cambiarFiltro('todas')" [class.active]="filtro() === 'todas'">Todas</button>
-    <button type="button" (click)="cambiarFiltro('pendientes')" [class.active]="filtro() === 'pendientes'">Pendientes</button>
-    <button type="button" (click)="cambiarFiltro('completadas')" [class.active]="filtro() === 'completadas'">Completadas</button>
+
+    <button
+      type="button"
+      (click)="cambiarFiltro('todas')"
+      [class.active]="filtro() === 'todas'"
+      [attr.aria-pressed]="filtro() === 'todas'">
+      Todas
+    </button>
+
+    <button
+      type="button"
+      (click)="cambiarFiltro('pendientes')"
+      [class.active]="filtro() === 'pendientes'"
+      [attr.aria-pressed]="filtro() === 'pendientes'">
+      Pendientes
+    </button>
+
+    <button
+      type="button"
+      (click)="cambiarFiltro('completadas')"
+      [class.active]="filtro() === 'completadas'"
+      [attr.aria-pressed]="filtro() === 'completadas'">
+      Completadas
+    </button>
+
   </div>
 
-  <button type="button" class="btn-load" (click)="taskService.loadTasks()">
-    Recargar tareas desde la API
+  <!-- Botón para restablecer las tareas -->
+  <button
+    type="button"
+    class="btn-load"
+    [disabled]="taskService.loading()"
+    (click)="taskService.loadTasks(true)">
+    Restablecer tareas desde la API
   </button>
 
   @if (taskService.loading()) {
-    <p style="text-align: center; color: #2e0d57; font-weight: bold; margin: 20px 0;">Cargando tareas...</p>
-  } 
-  
+    <p role="status" style="text-align: center; color: #2e0d57; font-weight: bold; margin: 20px 0;">
+      Cargando tareas...
+    </p>
+  }
+
   @if (taskService.error()) {
-    <div style="background: #fee2e2; color: #dc2626; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+    <div role="alert" style="background: #fee2e2; color: #b91c1c; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
       {{ taskService.error() }}
     </div>
   }
 
-  <ul class="task-list" style="list-style: none; padding: 0;">
+  <ul class="task-list">
+
     @for (tarea of tareasFiltradas(); track tarea.id) {
-      
-      <app-task-item 
-        [tarea]="tarea"
-        (borrar)="manejarBorrado($event)"
-        (toggle)="manejarToggle($event)"
-        (editar)="manejarEdicion($event)">
-      </app-task-item>
+
+      <li>
+        <app-task-item
+          [tarea]="tarea"
+          (borrar)="manejarBorrado($event)"
+          (toggle)="manejarToggle($event)"
+          (editar)="manejarEdicion($event)">
+        </app-task-item>
+      </li>
 
     } @empty {
+
       @if (!taskService.loading()) {
-        <li class="empty-message">No hay tareas que coincidan con los filtros.</li>
+        <li class="empty-message">
+          No hay tareas que coincidan con los filtros.
+        </li>
       }
+
     }
+
   </ul>
 
-  <p class="task-count">Mostrando {{ tareasFiltradas().length }} tareas</p>
+  <p class="task-count">
+    Mostrando {{ tareasFiltradas().length }} tareas
+  </p>
+
 </div>

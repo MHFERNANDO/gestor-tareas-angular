@@ -10,10 +10,9 @@ import { TaskService } from '../../services/task.service';
   styleUrl:'./task-detail.css'
 })
 
-
 export class TaskDetail{
 
-  private taskService = inject(TaskService);
+  readonly taskService = inject(TaskService);
 
   tarea= input<Task | null>(null);
 

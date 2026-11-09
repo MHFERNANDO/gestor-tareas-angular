@@ -6,7 +6,7 @@
 **Framework seleccionado:** Angular  
 **Integrantes:** Victoria Andrade, Isabel Ullauri, Mateo Molina y Fernando Martinez  
 **Repositorio GitHub:** https://github.com/MHFERNANDO/gestor-tareas-angular  
-**Aplicación desplegada:** https://gestor-tareas-ups.netlify.app
+**Aplicación desplegada:** https://gestor-tareas-angular.netlify.app
 
 ---
 
@@ -408,7 +408,7 @@ Se utilizaron herramientas de IA como apoyo para investigar, comprender concepto
 
 Las respuestas se utilizaron como orientación y se contrastaron con las fuentes oficiales y las pruebas disponibles, sin considerar la respuesta de la IA como evidencia suficiente por sí sola.
 
-**Cuaderno grupal de NotebookLM:** *Estudio Angular — Gestor de Tareas*. **[Agregar aquí el enlace compartido del cuaderno]**.
+**Cuaderno grupal de NotebookLM:** *Estudio Angular — Gestor de Tareas*. https://notebook.google.com/notebook/54c4fccf-ff18-4e3d-8c5c-874044e36f44
 
 ---
 

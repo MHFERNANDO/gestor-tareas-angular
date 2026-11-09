@@ -4,7 +4,7 @@
 **Asignatura:** Programación y Plataformas Web  
 **Universidad:** Universidad Politécnica Salesiana  
 **Framework seleccionado:** Angular  
-**Integrantes:** Victoria Andrade, Isabel Ullauri, Mateo Molina y Fernando Martinez  
+**Integrantes:** Victoria Andrade, Isabel Ullauri, Mateo Molina y Fernando Martínez  
 **Repositorio GitHub:** https://github.com/MHFERNANDO/gestor-tareas-angular  
 **Aplicación desplegada:** https://gestor-tareas-angular.netlify.app
 
